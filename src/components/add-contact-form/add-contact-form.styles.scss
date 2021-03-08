@@ -1,0 +1,51 @@
+$sub-color: grey;
+$main-color: black;
+
+@mixin shrinkLabel {
+  top: -14px;
+  font-size: 12px;
+  color: $main-color;
+}
+
+
+.label {
+    color: $sub-color;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 0.5rem;
+    top: 0.9rem;
+    transition: 300ms ease all;
+}
+
+.div{
+    position: relative;
+}
+// top: -14px;
+// font-size: 12px;
+// color: $main-color;
+
+.input{
+    
+    background: none;
+    background-color: white;
+    color: $sub-color;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid grey;
+    margin: 25px 0;
+    // overflow: hidden;
+    &:focus {
+        outline: none;
+        background-color: rgba(235, 221, 221, 0.377) ;
+    }
+}
+.shrink{
+    @include shrinkLabel();
+
+}
