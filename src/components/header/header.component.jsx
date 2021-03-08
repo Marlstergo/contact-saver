@@ -16,7 +16,7 @@ const Header = () =>{
                 <div className="user-area">
                     <span>Hello Name</span>
                     <span>
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <i className="fa fa-sign-out" aria-hidden="true"></i>
                         Logout
                     </span>
                 </div>
