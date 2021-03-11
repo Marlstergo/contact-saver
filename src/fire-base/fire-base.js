@@ -54,18 +54,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>{
 //     return await batch.commit()
 // }
 
-// export const getCurrentUser = () =>{
-//     return new Promise((resolve, reject ) =>{
-//         const unsunscribe = auth.onAuthStateChanged(
-//             (userAuth) =>{
-//                 unsunscribe()
-//                 resolve(userAuth)                
-//             }, 
-//             reject
-//         )
-//     }) 
+export const getCurrentUser = () =>{
+    return new Promise((resolve, reject ) =>{
+        const unsunscribe = auth.onAuthStateChanged(
+            (userAuth) =>{
+                unsunscribe()
+                resolve(userAuth)                
+            }, 
+            reject
+        )
+    }) 
 
-//     }
+    }
 
 
 // export const convertCollectionsSnapshotToMap = (collections) =>{

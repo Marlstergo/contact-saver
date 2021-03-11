@@ -9,7 +9,7 @@ import {
     signUpWithEmailSuccess, 
     signUpWithEmailFailure
     } from "./user.action";
-import { createUserProfileDocument, googleProvider, auth, getCurrentUser} from '../../firebase/firebase.util'
+import { createUserProfileDocument, googleProvider, auth, getCurrentUser} from '../../fire-base/fire-base'
 
 
 function* getSnapshotFromUserAuth (user, additionalData){
@@ -54,6 +54,7 @@ export function* signUpSuccess({ payload: { user, additionalData } }){
 
 export function* signInWithGoogle() {
     try {
+        console.log('signinwithgoogle started')
         const {user} = yield auth.signInWithPopup(googleProvider)
         yield getSnapshotFromUserAuth(user)
     } catch (error) {

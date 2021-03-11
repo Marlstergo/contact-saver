@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 
+import {connect} from 'react-redux'
+
+import { googleSignInStart, emailSignInStart } from "../../redux/user/user.action";
+
 
 import './sign-in.styles.scss'
 
-const SignIn = () =>{
+const SignIn = ({emailSignInStart, googleSignInStart}) =>{
     const [userDetails, setDetails] = useState({
         
         email: '',
@@ -16,9 +20,13 @@ const SignIn = () =>{
         const {value, name}= e.target;
         setDetails({...userDetails, [name] : value})
     }
+    const handleSubmit= async (e)=>{
+        e.preventDefault(); 
+        emailSignInStart(email, password)
+    }
     return(
         <div className='sign-in-container'>
-            <form className='sign-form'>
+            <form onSubmit={handleSubmit} className='sign-form'>
                 <div className="div">
                     <input onChange={handleChange} className='input' type="email" name="email" id="email"/>
                     
@@ -33,7 +41,8 @@ const SignIn = () =>{
                 
                 
                 <br/>
-                <button>Sign in</button>
+                <button >Sign in</button>
+                <button type='button' onClick={googleSignInStart}>sign in with google</button>
                 <div>
                 {/* {(document.querySelector('input[name="contact-type"]:checked').value)} */}
 
@@ -46,4 +55,13 @@ const SignIn = () =>{
     )
 }
 
-export default SignIn;
+
+const mapDispatchToProps = dispatch =>({
+    googleSignInStart: () => dispatch(googleSignInStart()),
+    emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({email, password}))
+})
+
+
+
+export default connect(null, mapDispatchToProps)(SignIn);
