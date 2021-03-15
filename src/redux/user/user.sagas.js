@@ -85,6 +85,7 @@ export function* signUserOut(){
 export function* onGoogleSigninStart (){ 
     yield (takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle))
 }
+
 export function* onSignInWithEmail (){
     yield (takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, signInwithEmail))
 }
