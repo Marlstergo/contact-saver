@@ -16,12 +16,15 @@ const ContactForm = () =>{
         const {value, name}= e.target;
         setDetails({...contactDetails, [name] : value})
     }
+    const onSubmit=(e)=>{
+        e.preventDefault()
+    }
     // document.querySelector('input[name="genderS"]:checked').value;
 
     return(
         <div>
             <h1>Add Contact</h1>
-            <form className='form'>
+            <form onSubmit={onSubmit} className='form'>
                 <div className="div">
                     <input onChange={handleChange} className='input' type="text" name="name" id="name"/>
                     
@@ -42,8 +45,7 @@ const ContactForm = () =>{
                 <p><strong>Contact type</strong></p>
                 <input type="radio" name="contact-type" id="personal" value='personal' defaultChecked />
                 <label htmlFor="personal">Personal</label>
-                <input type="radio" name="contact-type" id="professional" onLoad={    console.log(document.querySelector('input[name="contact-type"]'))
-} value='professional'/>
+                <input type="radio" name="contact-type" id="professional" defaultChecked value='professional'/>
                 <label htmlFor="professional">Professional</label>
                 <br/>
                 <button>Add Contact</button>
