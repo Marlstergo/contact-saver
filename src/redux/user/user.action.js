@@ -51,7 +51,18 @@ export const signUpWithEmailFailure = (error) => ({
     type: UserActionTypes.SIGN_UP_WITH_EMAIL_FAILURE,
     payload: error
 })
-
+export const addContact = (contactDetails) => ({
+    type: UserActionTypes.ADD_CONTACT,
+    payload: contactDetails
+})
+export const fetchContacts = () => ({
+    type: UserActionTypes.FETCH_CONTACTS
+    
+})
+export const loadContactsToState = (contacts) =>({
+    type:UserActionTypes.LOAD_CONTACTS_TO_STATE,
+    payload: contacts
+})
 // export const signUpWithEmailSuccess = (user) => ({
 //     type: UserActionTypes.SIGN_UP_WITH_EMAIL_START,
 //     payload: user

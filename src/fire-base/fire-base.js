@@ -11,14 +11,42 @@ const config = {
     appId: "1:628166739275:web:fc8cd3dd3b0e77997d14ce",
     measurementId: "G-4F4VV9GCHV"
 };
+export const addContact = async (userAuth, name, number, email, contactType) =>{
+    if (!userAuth) return;
 
+    const userRefrence = firestore.doc(`users/${userAuth.uid}`)
+
+    const snapShot = await userRefrence.get();
+
+        const createdAt = new Date();
+        const user = snapShot.data()
+        const userContacts = user.contacts
+        console.log(user)
+
+        try{
+            userContacts.push({
+                name,
+                number,
+                email,
+                contactType,
+                createdAt
+            })
+            await userRefrence.update({
+                contacts: userContacts
+            })
+
+        } catch (error){
+            console.log('error creating user', error.message)
+        }
+    return userRefrence;
+}
 export const createUserProfileDocument = async (userAuth, additionalData) =>{
     if (!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`)
 
     const snapShot = await userRef.get();
-
+    
     if(!snapShot.exists){
         const{displayName, email} = userAuth;
         const createdAt = new Date();
@@ -28,17 +56,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>{
                 displayName,
                 email,
                 createdAt,
+                contacts: [],
                 ...additionalData
             })
-
+            
         } catch (error){
             console.log('error creating user', error.message)
         }
     }
-
+    // userRef.update({
+    //     add: 'added me'
+    // })
+    // console.log( userRef.get().data())
 
     
-    return userRef;
+    // return userRef;
 }
 
 // export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) =>  {
@@ -64,7 +96,7 @@ export const getCurrentUser = () =>{
             reject
         )
     }) 
-
+    
     }
 
 

@@ -1,7 +1,8 @@
 import UserActionTypes from './user.types'
 const INITIAL_STATE = {
     currentUser: null,
-    error: null
+    error: null,
+    contact: null
 }
 const userReducer = (state = INITIAL_STATE, action) =>{
     switch(action.type){
@@ -30,6 +31,15 @@ const userReducer = (state = INITIAL_STATE, action) =>{
             return{
                 ...state,
                 error: action.payload
+            }
+        case UserActionTypes.ADD_CONTACT:
+            return{
+                ...state
+            }
+        case UserActionTypes.LOAD_CONTACTS_TO_STATE:
+            return {
+                ...state,
+                contact: action.payload
             }
         default:
             return state;

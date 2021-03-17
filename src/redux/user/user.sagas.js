@@ -7,9 +7,16 @@ import {
     signInFailure, 
     signOutUserSuccess, 
     signUpWithEmailSuccess, 
-    signUpWithEmailFailure
+    signUpWithEmailFailure,
+    loadContactsToState
     } from "./user.action";
-import { createUserProfileDocument, googleProvider, auth, getCurrentUser} from '../../fire-base/fire-base'
+import { createUserProfileDocument,
+    googleProvider, 
+    auth, 
+    getCurrentUser, 
+    addContact, 
+    firestore
+} from '../../fire-base/fire-base'
 
 
 function* getSnapshotFromUserAuth (user, additionalData){
@@ -17,6 +24,7 @@ function* getSnapshotFromUserAuth (user, additionalData){
         
         const userRef = yield call(createUserProfileDocument, user, additionalData)
         const userSnapshot = yield userRef.get();
+        console.log(userSnapshot.id)
         yield put(
             signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
     } catch (error) {
@@ -54,7 +62,7 @@ export function* signUpSuccess({ payload: { user, additionalData } }){
 
 export function* signInWithGoogle() {
     try {
-        console.log('signinwithgoogle started')
+        // console.log('signinwithgoogle started')
         const {user} = yield auth.signInWithPopup(googleProvider)
         yield getSnapshotFromUserAuth(user)
     } catch (error) {
@@ -73,6 +81,14 @@ export function* checkUserSessions() {
     }
     
 }
+export function* updateContact({payload: {name, email, number, contactType } }) {
+    try{
+        const userAuth = yield getCurrentUser()
+        yield addContact(userAuth, name, number, email, contactType)
+    } catch{
+        console.log('error adding contact')
+    }
+}
 export function* signUserOut(){
     try {
         yield auth.signOut()
@@ -80,6 +96,23 @@ export function* signUserOut(){
     } catch (error) {
         yield put(signInFailure(error))
     }
+}
+export function* loadContacts(){
+    try {
+        const userAuth = yield getCurrentUser()
+        const userRefrence = firestore.doc(`users/${userAuth.uid}`)
+        const snapShot = yield userRefrence.get();
+        const user = snapShot.data()
+        const userContacts = user.contacts
+        
+        yield put(loadContactsToState(userContacts))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function* fetchContacts () {
+    yield(takeLatest(UserActionTypes.FETCH_CONTACTS, loadContacts))
 }
 
 export function* onGoogleSigninStart (){ 
@@ -101,6 +134,9 @@ export function* onSignUpUser (){
 export function* onSignUpSuccess (){
     yield takeLatest(UserActionTypes.SIGN_UP_WITH_EMAIL_SUCCESS, signUpSuccess)
 }
+export function* addContacts (){
+    yield takeLatest(UserActionTypes.ADD_CONTACT, updateContact)
+}
 
 export function* userSagas(){
     yield all([
@@ -109,6 +145,8 @@ export function* userSagas(){
         call(onCheckUserSession), 
         call(onSignOutUser),
         call(onSignUpUser),
-        call(onSignUpSuccess)
+        call(onSignUpSuccess),
+        call(addContacts),
+        call(fetchContacts)
     ])
 }

@@ -1,16 +1,20 @@
 import React ,{useState} from 'react'
+import {connect} from 'react-redux'
+import {createStructuredSelector} from 'reselect'
+import { addContact } from '../../redux/user/user.action';
 
 
 import './add-contact-form.styles.scss'
 
-const ContactForm = () =>{
+const ContactForm = ({addContactz}) =>{
     const [contactDetails, setDetails] = useState({
         name: '',
         email: '',
         phoneNumber: '',
+        contactType: 'professional'
     })
 
-    const {name, email, phoneNumber} = contactDetails
+    const {name, email, phoneNumber, contactType} = contactDetails
     // console.log(name.length)
     const handleChange=(e)=>{
         const {value, name}= e.target;
@@ -18,13 +22,14 @@ const ContactForm = () =>{
     }
     const onSubmit=(e)=>{
         e.preventDefault()
+        addContactz(name, phoneNumber, email, contactType)
     }
     // document.querySelector('input[name="genderS"]:checked').value;
 
     return(
         <div>
             <h1>Add Contact</h1>
-            <form onSubmit={onSubmit} className='form'>
+            <form  className='form'>
                 <div className="div">
                     <input onChange={handleChange} className='input' type="text" name="name" id="name"/>
                     
@@ -48,7 +53,7 @@ const ContactForm = () =>{
                 <input type="radio" name="contact-type" id="professional" defaultChecked value='professional'/>
                 <label htmlFor="professional">Professional</label>
                 <br/>
-                <button>Add Contact</button>
+                <button onClick={() =>addContactz(name, email, phoneNumber, contactType)} type='button'>Add Contact</button>
                 <div>
                 {/* {(document.querySelector('input[name="contact-type"]:checked').value)} */}
 
@@ -61,5 +66,9 @@ const ContactForm = () =>{
     )
 }
 
+    
+    const mapDispatchToProps = dispatch => ({
+        addContactz: (name, number, email, contactType) => dispatch(addContact({name, number, email, contactType}))
+    })
 
-export default ContactForm;
+export default connect(null, mapDispatchToProps)(ContactForm)
