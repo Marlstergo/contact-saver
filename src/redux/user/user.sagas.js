@@ -21,10 +21,11 @@ import { createUserProfileDocument,
 
 function* getSnapshotFromUserAuth (user, additionalData){
     try {
-        
+        console.log('i have fired')
         const userRef = yield call(createUserProfileDocument, user, additionalData)
         const userSnapshot = yield userRef.get();
         console.log(userSnapshot.id)
+        console.log('this is inside the function')
         yield put(
             signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
     } catch (error) {
@@ -54,7 +55,16 @@ export function* signUpWithEmail({payload: {email, password, displayName } }){
 }
 export function* signUpSuccess({ payload: { user, additionalData } }){
     try {
-        yield getSnapshotFromUserAuth(user,additionalData)
+        // yield getSnapshotFromUserAuth(user,additionalData)
+        console.log('i have fired')
+        const userRef = yield call(createUserProfileDocument, user, additionalData)
+        console.log('this is inbetween')
+        // const userSnapshotz = yield userRef.get();
+        console.log(userRef.get());
+
+        // console.log(userSnapshot.id)
+        console.log('this is inside the function')
+        // yield put(signInSuccess({ id: userSnapshotz.id, ...userSnapshotz.data() }))
     } catch (error) {
         yield put(signInFailure(error))
     }
@@ -62,7 +72,7 @@ export function* signUpSuccess({ payload: { user, additionalData } }){
 
 export function* signInWithGoogle() {
     try {
-        // console.log('signinwithgoogle started')
+        console.log('signinwithgoogle started')
         const {user} = yield auth.signInWithPopup(googleProvider)
         yield getSnapshotFromUserAuth(user)
     } catch (error) {

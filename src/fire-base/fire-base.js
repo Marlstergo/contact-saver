@@ -56,9 +56,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>{
                 displayName,
                 email,
                 createdAt,
-                contacts: [],
+                contacts: [null],
                 ...additionalData
             })
+            console.log('success in firebase.js')
             
         } catch (error){
             console.log('error creating user', error.message)

@@ -64,7 +64,7 @@ const SignUp = ({signUp}) =>{
                 </div>
                 <div className="div">
                     <input onChange={handleChange}  className='input' type="password" name="confirmPassword" id="confirm-password"/>
-                    <label className={`${ password.length ? 'shrink' : ''} label`} htmlFor="confirm-password">password</label>
+                    <label className={`${ confirmPassword.length ? 'shrink' : ''} label`} htmlFor="confirm-password">confirm password</label>
                 </div>
                 
                 <br/>
