@@ -55,16 +55,7 @@ export function* signUpWithEmail({payload: {email, password, displayName } }){
 }
 export function* signUpSuccess({ payload: { user, additionalData } }){
     try {
-        // yield getSnapshotFromUserAuth(user,additionalData)
-        console.log('i have fired')
-        const userRef = yield call(createUserProfileDocument, user, additionalData)
-        console.log('this is inbetween')
-        // const userSnapshotz = yield userRef.get();
-        console.log(userRef.get());
-
-        // console.log(userSnapshot.id)
-        console.log('this is inside the function')
-        // yield put(signInSuccess({ id: userSnapshotz.id, ...userSnapshotz.data() }))
+        yield getSnapshotFromUserAuth(user,additionalData)
     } catch (error) {
         yield put(signInFailure(error))
     }

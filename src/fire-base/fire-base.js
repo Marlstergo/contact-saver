@@ -71,7 +71,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>{
     // console.log( userRef.get().data())
 
     
-    // return userRef;
+    return userRef;
 }
 
 // export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) =>  {
