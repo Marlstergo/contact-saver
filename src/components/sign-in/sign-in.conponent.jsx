@@ -26,6 +26,9 @@ const SignIn = ({emailSignInStart, googleSignInStart}) =>{
     }
     return(
         <div className='sign-in-container'>
+            <h3>
+                SIGN INTO YOUR ACCOUNT
+            </h3>
             <form onSubmit={handleSubmit} className='sign-form'>
                 <div className="div">
                     <input onChange={handleChange} className='input' type="email" name="email" id="email"/>
@@ -51,6 +54,7 @@ const SignIn = ({emailSignInStart, googleSignInStart}) =>{
 
 
             </form>
+            <p>i have no account? <a href="./signup"> sign in </a></p>
         </div>
     )
 }

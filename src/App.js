@@ -1,34 +1,41 @@
 import React from 'react'
+import {Switch, Redirect, Route} from 'react-router-dom'
+import { connect } from 'react-redux';
 
-import Filter from './components/filter/filter.component'
-import ContactForm from './components/add-contact-form/add-contact-form.component'
-import Header from './components/header/header.component'
 import SignUp from './components/sign-up/sign-up.component'
 import SignIn from './components/sign-in/sign-in.conponent'
-
+import HomePage from './pages/home-page/home-page.component'
 import './App.scss';
+import { createStructuredSelector } from 'reselect'
+import { selectCurrentUser } from './redux/user/user.selector'
 
 
-function App() {
+function App({currentUser}) {
   return (
     <div className="App">
-      <div className='header'>
-        <Header/>
-      </div>
-      <div className='body-part'>
-        <div className='form-container'>
-          <ContactForm/>
-        </div>
-        <div className='cards-container'>
-          <Filter/>
-        </div>
-        <div>
-          <SignUp/>
-        </div>
-      </div>
-      <div>
-        <SignIn/>
-      </div>
+      
+    <Switch >
+      <Route exact path='/' render={() => 
+            currentUser ?
+              (<Redirect to= '/home' />)
+              :
+              (<SignIn/>)
+          } />
+      <Route exact path='/signup' render={() => 
+            currentUser ?
+              (<Redirect to= '/home' />)
+              :
+              (<SignUp/>)
+          } />
+      <Route exact path='/home' render={() => 
+            !currentUser ?
+              (<Redirect to= '/' />)
+              :
+              (<HomePage/>)
+          } />
+      
+
+    </Switch>
 
         
     </div>
@@ -36,4 +43,11 @@ function App() {
   
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  
+})
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

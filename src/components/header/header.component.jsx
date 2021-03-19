@@ -6,11 +6,11 @@ import { selectCurrentUser } from '../../redux/user/user.selector'
 
 import './header.styles.scss'
 
-const Header = ({username, checkUserSession, logout}) =>{
+const Header = ({username, logout}) =>{
 
     useEffect(() =>{
-        checkUserSession()
-      }, [checkUserSession])
+        
+      }, [])
     return(
         <div className="header">
             <div className="header-container">
@@ -35,7 +35,6 @@ const mapStateToProps = createStructuredSelector({
 })
 const mapDispatchToProps = dispatch => ({
     logout : () => dispatch(signOutUserStart()),
-    checkUserSession: () => dispatch(checkUserSession())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
