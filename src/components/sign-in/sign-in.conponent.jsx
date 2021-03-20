@@ -1,13 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {connect} from 'react-redux'
 
-import { googleSignInStart, emailSignInStart } from "../../redux/user/user.action";
+import { googleSignInStart, emailSignInStart, checkUserSession, fetchContacts } from "../../redux/user/user.action";
 
 
 import './sign-in.styles.scss'
 
-const SignIn = ({emailSignInStart, googleSignInStart}) =>{
+const SignIn = ({emailSignInStart, googleSignInStart, checkUserSession, loadContacts}) =>{
+
+    useEffect(() =>{
+        async function run (){
+
+            await checkUserSession()
+            await loadContacts()
+        
+    }   
+    run()
+
+    })
+
     const [userDetails, setDetails] = useState({
         
         email: '',
@@ -62,8 +74,9 @@ const SignIn = ({emailSignInStart, googleSignInStart}) =>{
 
 const mapDispatchToProps = dispatch =>({
     googleSignInStart: () => dispatch(googleSignInStart()),
-    emailSignInStart: (email, password) =>
-    dispatch(emailSignInStart({email, password}))
+    emailSignInStart: (email, password) => dispatch(emailSignInStart({email, password})),
+    checkUserSession: () => dispatch(checkUserSession()),
+    loadContacts: () => dispatch(fetchContacts())
 })
 
 

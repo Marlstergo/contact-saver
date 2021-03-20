@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import Filter from '../../components/filter/filter.component'
-import ContactCard from '../../components/contact-card/contact-card.component'
 import Header from '../../components/header/header.component'
 import ContactForm from '../../components/add-contact-form/add-contact-form.component'
+import { fetchContacts } from "../../redux/user/user.action";
+import { connect } from "react-redux";
 
 
-const HomePage = () =>{
+const HomePage = ({fetchContactz}) =>{
 
-
+    useEffect(()=>{
+        fetchContactz()
+    },[])
     return(
         <div>
             <div className='header'>
@@ -24,5 +27,7 @@ const HomePage = () =>{
         </div>
     )
 }
-
-export default HomePage;
+const mapDispatchToProps = dispatch => ({
+    fetchContactz: () => dispatch(fetchContacts())
+})
+export default connect(null, mapDispatchToProps)( HomePage);

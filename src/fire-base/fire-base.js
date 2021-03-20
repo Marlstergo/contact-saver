@@ -26,8 +26,8 @@ export const addContact = async (userAuth, name, number, email, contactType) =>{
         try{
             userContacts.push({
                 name,
-                number,
                 email,
+                number,
                 contactType,
                 createdAt
             })

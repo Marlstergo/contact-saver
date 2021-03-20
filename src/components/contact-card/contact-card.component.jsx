@@ -1,15 +1,15 @@
-import React, { useEffect} from 'react'
+import React, { } from 'react'
 import {connect} from 'react-redux'
-import { fetchContacts } from '../../redux/user/user.action'
+// import { fetchContacts } from '../../redux/user/user.action'
 
 import './contact-card.styles.scss'
 
 
-const ContactCard = ({fetchContacts}) =>{
+const ContactCard = () =>{
 
-    useEffect(() =>{
-        fetchContacts()
-    }, [])
+    // useEffect(() =>{
+    //     fetchContacts()
+    // }, [])
     return(
         <div>
             <h3>Name</h3>
@@ -23,8 +23,6 @@ const ContactCard = ({fetchContacts}) =>{
     )
 }
 
-const mapDispatchToProps = dispatch =>({
-    fetchContacts: () => dispatch(fetchContacts())
-}) 
 
-export default connect(null, mapDispatchToProps)(ContactCard);
+
+export default connect(null)(ContactCard);

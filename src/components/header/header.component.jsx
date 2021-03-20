@@ -1,16 +1,14 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {createStructuredSelector} from 'reselect'
-import { checkUserSession, signOutUserStart } from '../../redux/user/user.action'
+import { signOutUserStart } from '../../redux/user/user.action'
 import { selectCurrentUser } from '../../redux/user/user.selector'
 
 import './header.styles.scss'
 
-const Header = ({username, logout}) =>{
+const Header = ({user, logout}) =>{
 
-    useEffect(() =>{
-        
-      }, [])
+
     return(
         <div className="header">
             <div className="header-container">
@@ -18,7 +16,7 @@ const Header = ({username, logout}) =>{
                     <h1>CONTACT kEEPER</h1>
                 </div>
                 <div className="user-area">
-                    <span>Hellooo {username ? `${username.displayName}` : ''}</span>
+                    <span>Hellooo {user ? `${user.displayName}` : ''}</span>
                     <span onClick={()=>logout()}>
                         <i className="fa fa-sign-out" aria-hidden="true"></i>
                         Logout now
@@ -31,7 +29,7 @@ const Header = ({username, logout}) =>{
 }
 
 const mapStateToProps = createStructuredSelector({
-    username: selectCurrentUser
+    user: selectCurrentUser
 })
 const mapDispatchToProps = dispatch => ({
     logout : () => dispatch(signOutUserStart()),

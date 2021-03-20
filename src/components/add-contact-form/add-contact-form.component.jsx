@@ -1,12 +1,12 @@
 import React ,{useState} from 'react'
 import {connect} from 'react-redux'
-import {createStructuredSelector} from 'reselect'
-import { addContact } from '../../redux/user/user.action';
+// import {createStructuredSelector} from 'reselect'
+import { addContact, fetchContacts, loadContactsToState } from '../../redux/user/user.action';
 
 
 import './add-contact-form.styles.scss'
 
-const ContactForm = ({addContactz}) =>{
+const ContactForm = ({addContactz, loadContactz}) =>{
     const [contactDetails, setDetails] = useState({
         name: '',
         email: '',
@@ -20,12 +20,12 @@ const ContactForm = ({addContactz}) =>{
         const {value, name}= e.target;
         setDetails({...contactDetails, [name] : value})
     }
-    const onSubmit=(e)=>{
-        e.preventDefault()
-        addContactz(name, phoneNumber, email, contactType)
-    }
+    // const onSubmit=(e)=>{
+    //     e.preventDefault()
+    //     addContactz(name, phoneNumber, email, contactType)
+    // }
     // document.querySelector('input[name="genderS"]:checked').value;
-
+    
     return(
         <div>
             <h1>Add Contact</h1>
@@ -53,12 +53,15 @@ const ContactForm = ({addContactz}) =>{
                 <input type="radio" name="contact-type" id="professional" defaultChecked value='professional'/>
                 <label htmlFor="professional">Professional</label>
                 <br/>
-                <button onClick={() =>addContactz(name, email, phoneNumber, contactType)} type='button'>Add Contact</button>
+                <button onClick={ async() =>
+                {
+                    await addContactz(name, email, phoneNumber, contactType)
+                    await loadContactz()
+                }
+                    } type='button'>Add Contact</button>
                 <div>
-                {/* {(document.querySelector('input[name="contact-type"]:checked').value)} */}
 
                 </div>
-            {/* {console.log(document.querySelector('input[name="contact-type"]').value)} */}
 
 
             </form>
@@ -68,7 +71,8 @@ const ContactForm = ({addContactz}) =>{
 
     
     const mapDispatchToProps = dispatch => ({
-        addContactz: (name, number, email, contactType) => dispatch(addContact({name, number, email, contactType}))
+        addContactz: (name, number, email, contactType) => dispatch(addContact({name, number, email, contactType})),
+        loadContactz: () => dispatch(fetchContacts())
     })
 
 export default connect(null, mapDispatchToProps)(ContactForm)
