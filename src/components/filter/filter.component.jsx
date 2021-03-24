@@ -10,24 +10,43 @@ import './filter.styles.scss'
 
 
 const Filter = ({contacts, users, fetchContacts}) =>{
-    console.log(contacts)
-    console.log(users)
-    console.log(contacts)
-    const [email, setEmail] =useState({
-        eml: null,
-        me: 'mel'
-    })
-    useEffect(()=>{
-        setEmail({ eml: contacts})
-    },[contacts])
+    console.log(contacts[9].email)
+    const a = contacts
+    // const [email, setEmail] =useState({
+    //     eml: 'null',
+    //     me: contacts[7]
+    // })
+const g = [{a: 'abd', b: 'shola'},{a: 'doy', b: 'tay'}]
+    // useEffect(()=>{
+    //     setEmail({ eml: contacts})
+    // },[contacts])
+    console.log(g)
     return(
         <div>
-
-            <p>emails: {contacts[11].email} </p>
+            {/* {contacts[9].email}
             {
-                email.me
+                contacts.forEach( () => {
+                    console.log('email')
+                })
             }
-            <dir>{email.me}</dir>
+            {g.map((contact) => (
+                <div> nunber {`shola  ${contact.a}`} </div>
+            ))} */}
+
+            {a.map(listitem => (
+                <li  className="list-group-item">
+                        <span>
+                                {listitem.name}
+                                {listitem.email}
+                        </span>
+                        
+                </li>
+        ))}
+
+
+
+            <p>emails: </p>
+            
                 
             
 
