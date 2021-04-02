@@ -107,16 +107,16 @@ export function* loadContacts(){
         const snapShot = yield userRefrence.get();
         const user = snapShot.data()
         const userContacts = user.contacts
-        console.log(userContacts)
+        // console.log(userContacts)
         yield put(loadContactsToState(userContacts))
     } catch (error) {
         console.log(error)
     }
 }
 
-export function* fetchContacts () {
-    yield(takeLatest(UserActionTypes.FETCH_CONTACTS, loadContacts))
-}
+// export function* fetchContacts () {
+//     yield(takeLatest(UserActionTypes.FETCH_CONTACTS, loadContacts))
+// }
 
 export function* onGoogleSigninStart (){ 
     yield (takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle))
@@ -150,6 +150,6 @@ export function* userSagas(){
         call(onSignUpUser),
         call(onSignUpSuccess),
         call(addContacts),
-        call(fetchContacts)
+        // call(fetchContacts)
     ])
 }

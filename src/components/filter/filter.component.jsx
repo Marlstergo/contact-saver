@@ -4,58 +4,40 @@ import { createStructuredSelector } from 'reselect'
 import { fetchContacts } from '../../redux/user/user.action'
 import { selectCurrentUser, selectCurrentUserContacts } from '../../redux/user/user.selector'
 
+import { createUserProfileDocument,
+    googleProvider, 
+    auth, 
+    getCurrentUser, 
+    addContact, 
+    firestore
+} from '../../fire-base/fire-base'
+
 import ContactCard from '../contact-card/contact-card.component'
 
 import './filter.styles.scss'
 
 
 const Filter = ({contacts, users, fetchContacts}) =>{
-    // console.log(contacts[9].email)
-    // const a = contacts
-    // const jsonData = JSON.parse(a)
-    // console.log(jsonData)
-    // const ary = []
-    // a.forEach(element => {
-    //     ary.push(element)
-    // });
-    // console.log(ary)
-    // console.log(a)
-    // const [email, setEmail] =useState({
-    //     eml: 'null',
-    //     me: contacts[7]
-    // })
-const g = [{name: 'abd', b: 'shola'},{name: 'doy', b: 'tay'}]
-    // useEffect(()=>{
-    //     setEmail({ eml: contacts})
-    // },[contacts])
-    // console.log(g)
-    return(
-        <div>
-            {/* {contacts[9].email}
-            {
-                contacts.forEach( () => {
-                    console.log('email')
-                })
-            }
-            {g.map((contact) => (
-                <div> nunber {`shola  ${contact.a}`} </div>
-            ))} */}
+    const maliq = [1]
 
-            {/* {a.map(listitem => (
-                <li  className="list-group-item">
-                        <span>
-                                {listitem.name}
-                        </span>
-                        
-                </li>
-        ))}  */}
-        {/* {a} */}
-        {/* {ary[1].name} */}
-        {/* {
-            ary.forEach(element => {
-                return <div> {element.name} </div>
-            })
-        } */}
+    useEffect(() =>{
+        console.log('i logged')
+        const Unction = async () =>{
+        const userAuth = await getCurrentUser()
+        const userRefrence = firestore.doc(`users/${userAuth.uid}`)
+        const snapShot = await userRefrence.get();
+        const user = snapShot.data()
+        const userContacts = user.contacts
+        console.log('function done running')
+        }
+        Unction();
+
+        
+    },[])
+
+    const g = [{name: 'abd', b: 'shola'},{name: 'doy', b: 'tay'}]
+    return(contacts ?
+        <div>
 
 
             {/* {contacts[11].name}s */}
@@ -72,12 +54,12 @@ const g = [{name: 'abd', b: 'shola'},{name: 'doy', b: 'tay'}]
                 )
             )
         } */}
-                
+                {maliq}
             {
-            contacts.length > 1 ? contacts.map(contactInfo => (
+            maliq.map(contactInfo => (
                     <ContactCard  contactInfo={contactInfo}/>
                 )
-            ): null
+            )
         }
 
 
@@ -88,7 +70,7 @@ const g = [{name: 'abd', b: 'shola'},{name: 'doy', b: 'tay'}]
             <div>
             </div>
         </div>
-    )
+    : null)
 }
 
 const mapStateToProps = createStructuredSelector({

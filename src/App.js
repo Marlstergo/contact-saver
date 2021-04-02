@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import SignUp from './components/sign-up/sign-up.component'
 import SignIn from './components/sign-in/sign-in.conponent'
 import HomePage from './pages/home-page/home-page.component'
+import Filter from './components/filter/filter.component'
 import './App.scss';
 import { createStructuredSelector } from 'reselect'
 import { selectCurrentUser } from './redux/user/user.selector'
@@ -19,7 +20,10 @@ function App({currentUser}) {
             currentUser ?
               (<Redirect to= '/home' />)
               :
-              (<SignIn/>)
+              (<div><SignIn/>
+                <Filter/>
+                </div>
+                )
           } />
       <Route exact path='/signup' render={() => 
             currentUser ?

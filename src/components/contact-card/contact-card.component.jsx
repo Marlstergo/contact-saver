@@ -20,8 +20,9 @@ const ContactCard = ({contactInfo}) =>{
     return(
         
         <div>
-                maliq
-                {contactInfo.name}
+                
+                {contactInfo.email}
+                this is it
             {/* {
                 contactInfo.forEach(element => {
                     return (

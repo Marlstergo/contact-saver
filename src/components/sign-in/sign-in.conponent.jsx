@@ -13,7 +13,7 @@ const SignIn = ({emailSignInStart, googleSignInStart, checkUserSession, loadCont
         async function run (){
 
             await checkUserSession()
-            await loadContacts()
+            // await loadContacts()
         
     }   
     run()
