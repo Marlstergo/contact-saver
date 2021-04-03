@@ -56,7 +56,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>{
                 displayName,
                 email,
                 createdAt,
-                contacts: [null],
+                contacts: [],
                 ...additionalData
             })
             console.log('success in firebase.js')
