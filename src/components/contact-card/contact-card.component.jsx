@@ -19,9 +19,9 @@ const ContactCard = ({contacts}) =>{
     return(
         
         <div>
-                
+                {contacts.name}
                 {contacts.email}
-                
+                {contacts.number}
             {/* {
                 contactInfo.forEach(element => {
                     return (
