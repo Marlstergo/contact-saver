@@ -15,19 +15,25 @@ import { createUserProfileDocument,
 import ContactCard from '../contact-card/contact-card.component'
 
 import './filter.styles.scss'
-
+const opo = [
+    1,2,3,3,4,56
+]
 
 const Filter = ({contacts, users, fetchContacts}) =>{
-    const maliq = [1]
+    
+
+    const [m, setM] = useState([])
+
 
     useEffect(() =>{
-        console.log('i logged')
         const Unction = async () =>{
         const userAuth = await getCurrentUser()
         const userRefrence = firestore.doc(`users/${userAuth.uid}`)
         const snapShot = await userRefrence.get();
         const user = snapShot.data()
         const userContacts = user.contacts
+        console.log(userContacts)
+        setM(userContacts)
         console.log('function done running')
         }
         Unction();
@@ -38,30 +44,18 @@ const Filter = ({contacts, users, fetchContacts}) =>{
     const g = [{name: 'abd', b: 'shola'},{name: 'doy', b: 'tay'}]
     return(contacts ?
         <div>
-
-
-            {/* {contacts[11].name}s */}
-
-
-            <p>emails: </p>
+            <p>emails: </p>               
             {
-                
+            m.map(contactInfo =>{ 
+                console.log('am logging')
+                console.log(contactInfo)
+
+                return(<ContactCard contacts={contactInfo} />)
+
             }
-            {/* <ContactCard contactInfo={contacts} /> */}
-            {/* {
-            contacts.map(item => (
-                    <ContactCard  item={item}/>
-                )
-            )
-        } */}
-                {maliq}
-            {
-            maliq.map(contactInfo => (
-                    <ContactCard  contactInfo={contactInfo}/>
-                )
-            )
+        
+        )
         }
-
 
             
 

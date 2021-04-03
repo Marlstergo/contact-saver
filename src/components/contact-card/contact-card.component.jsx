@@ -5,12 +5,11 @@ import {connect} from 'react-redux'
 import './contact-card.styles.scss'
 
 
-const ContactCard = ({contactInfo}) =>{
+const ContactCard = ({contacts}) =>{
     // const { number, name, email} = contactInfo
     // if (contactInfo) {
     //     const {number, name, email}= contactInfo
     // }
-    
 
     // console.log(name)
     // useEffect(() =>{
@@ -21,8 +20,8 @@ const ContactCard = ({contactInfo}) =>{
         
         <div>
                 
-                {contactInfo.email}
-                this is it
+                {contacts.email}
+                
             {/* {
                 contactInfo.forEach(element => {
                     return (

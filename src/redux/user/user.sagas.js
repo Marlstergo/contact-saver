@@ -114,9 +114,9 @@ export function* loadContacts(){
     }
 }
 
-// export function* fetchContacts () {
-//     yield(takeLatest(UserActionTypes.FETCH_CONTACTS, loadContacts))
-// }
+export function* fetchContacts () {
+    yield(takeLatest(UserActionTypes.FETCH_CONTACTS, loadContacts))
+}
 
 export function* onGoogleSigninStart (){ 
     yield (takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, signInWithGoogle))
@@ -150,6 +150,6 @@ export function* userSagas(){
         call(onSignUpUser),
         call(onSignUpSuccess),
         call(addContacts),
-        // call(fetchContacts)
+        call(fetchContacts)
     ])
 }
