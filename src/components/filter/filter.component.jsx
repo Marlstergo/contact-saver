@@ -45,6 +45,7 @@ const Filter = ({contacts, loadContacts}) =>{
     },[m])
     return(
         <div>
+            <button onClick={()=>loadContacts()}>Refresh Contacts</button>
             <p>emails: </p>               
             {
             contacts.map(contactInfo =>{ 
