@@ -1,4 +1,5 @@
 import UserActionTypes from './user.types'
+import { removeContact } from './user.utils'
 const INITIAL_STATE = {
     currentUser: null,
     error: null,
@@ -13,7 +14,11 @@ const userReducer = (state = INITIAL_STATE, action) =>{
                 currentUser: action.payload,
                 error: null
             }
-        
+        case UserActionTypes.DELETE_CONTACT:
+            return{
+                ...state,
+                contact: removeContact(state.contact, action.payload)
+            }
         case UserActionTypes.CHECK_USER_SESSION:
 
             return {

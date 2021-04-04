@@ -1,7 +1,7 @@
 import React ,{useState} from 'react'
 import {connect} from 'react-redux'
 // import {createStructuredSelector} from 'reselect'
-import { addContact, fetchContacts, loadContactsToState } from '../../redux/user/user.action';
+import { addContact, fetchContacts } from '../../redux/user/user.action';
 
 
 import './add-contact-form.styles.scss'

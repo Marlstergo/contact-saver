@@ -1,45 +1,28 @@
 import React, { } from 'react'
 import {connect} from 'react-redux'
+import { deleteContact } from '../../redux/user/user.action'
 // import { fetchContacts } from '../../redux/user/user.action'
 
 import './contact-card.styles.scss'
 
 
-const ContactCard = ({contacts}) =>{
-    // const { number, name, email} = contactInfo
-    // if (contactInfo) {
-    //     const {number, name, email}= contactInfo
-    // }
-
-    // console.log(name)
-    // useEffect(() =>{
-    //     fetchContacts()
-    // }, [])
-    // console.log(contactInfo.name)
+const ContactCard = ({deleteContact, contacts}) =>{
+    const {name, email, number} = contacts
     return(
         
         <div>
-                {contacts.name}
-                {contacts.email}
-                {contacts.number}
-            {/* {
-                contactInfo.forEach(element => {
-                    return (
-                    <h1>{element.name}</h1>
-            )
-                }
-                )
-            } */}
-            {/* <h3>{name? name: null}</h3> */}
-            {/* <h2><i className="fa fa-envelope fa-2x" aria-hidden="true"></i>
-                {contactInfo}</h2> 
+            <h3>Name: {name}</h3>
+            <h2><i className="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                {email}</h2> 
             <h4> <i className="fa fa-phone fa-2x" aria-hidden="true"></i>
-                </h4>
-            <button>edit</button>
-            <button>delete</button> */}
+            {number}    </h4>
+            <button >edit</button>
+            <button onClick={() => deleteContact(name)}>delete</button>
         </div>
     )
 }
+const mapDispatchToProps = dispatch => ({
+    deleteContact : (name) => dispatch(deleteContact(name))
+})
 
-
-export default connect(null)(ContactCard);
+export default connect(null, mapDispatchToProps)(ContactCard);

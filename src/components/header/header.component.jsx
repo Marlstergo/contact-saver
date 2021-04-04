@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {createStructuredSelector} from 'reselect'
 import { signOutUserStart } from '../../redux/user/user.action'
@@ -17,7 +17,7 @@ const Header = ({user, logout}) =>{
                 </div>
                 <div className="user-area">
                     <span>Hellooo {user ? `${user.displayName}` : ''}</span>
-                    <span onClick={()=>logout()}>
+                    <span className='log-out' onClick={()=>logout()}>
                         <i className="fa fa-sign-out" aria-hidden="true"></i>
                         Logout now
                     </span>

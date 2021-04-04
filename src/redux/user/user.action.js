@@ -63,6 +63,10 @@ export const loadContactsToState = (contacts) =>({
     type:UserActionTypes.LOAD_CONTACTS_TO_STATE,
     payload: contacts
 })
+export const deleteContact = (contact) =>({
+    type: UserActionTypes.DELETE_CONTACT,
+    payload: contact
+})
 // export const signUpWithEmailSuccess = (user) => ({
 //     type: UserActionTypes.SIGN_UP_WITH_EMAIL_START,
 //     payload: user

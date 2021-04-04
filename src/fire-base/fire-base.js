@@ -22,7 +22,7 @@ export const addContact = async (userAuth, name, number, email, contactType) =>{
         const user = snapShot.data()
         const userContacts = user.contacts
         console.log(user)
-
+        
         try{
             userContacts.push({
                 name,
