@@ -30,7 +30,7 @@ const Filter = ({contacts, loadContacts}) =>{
         // Unction();
         const shola = 'state'
         setM(shola)
-        // console.log(contacts)
+        // console.log(contacts);
         console.log(m)
         // loadContacts()
         // const loader = async () =>{
