@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import {connect} from 'react-redux'
-import { deleteContact } from '../../redux/user/user.action'
+import { deleteContact, editContact } from '../../redux/user/user.action'
+// import { editContact } from '../../redux/user/user.utils'
 // import { fetchContacts } from '../../redux/user/user.action'
 
 import './contact-card.styles.scss'
 
 
-const ContactCard = ({deleteContact, contacts}) =>{
-    const {name, email, number} = contacts
+const ContactCard = ({deleteContact, editContact, contacts}) =>{
+    const {name, email, number, createdAt} = contacts
     const [editedDetails, setEditedDetails] = useState({
         newName: '',
         newNumber: '',
+        newEmail: '',
+        editing: false
     })
     const handleChange=(e)=>{
         const {value, name}= e.target;
-        setEditedDetails({...setEditedDetails, [name] : value})
+        setEditedDetails({...editedDetails, editing: true, [name] : value})
     }
-    const { newName, newNumber } = editedDetails
+    const { newName, newNumber, newEmail, editing } = editedDetails
     return(
         
         <div>
@@ -25,17 +28,31 @@ const ContactCard = ({deleteContact, contacts}) =>{
                 {email}</h2> 
             <h4> <i className="fa fa-phone fa-2x" aria-hidden="true"></i>
             {number}    </h4>
-            <button >edit</button>
+            <button onClick={() => {setEditedDetails({...editedDetails, editing: true})}} >edit</button>
             <button onClick={() => deleteContact(name)}>delete</button>
-            <div>
-                <input onChange={handleChange} type="text" placeholder='edit name..' name="newNname" id="new-name"/>
-                <input onChange={handleChange} type="number" name="newNumber" id="new-number"/>
+            <div >
+                <form key={createdAt} className={`${editing? 'show' : 'hidden'}`}>
+                    <input onChange={handleChange} required type="text" placeholder='edit name..' name="newName" id="new-name"/>
+                    <br/>
+                    
+                    <input onChange={handleChange} required type="number" name="newNumber" placeholder='edit number..' id="new-number"/>
+                    <br/>
+                    <button onClick={ (e) =>{ 
+                        setEditedDetails({...editedDetails, editing: !editing}) 
+                        editContact(name, {newName, newNumber})
+                        e.preventDefault()
+                    }}>done</button>
+                </form>
+                
             </div>
+            {console.log(newName)}
+                {console.log(newNumber)}
         </div>
     )
 }
 const mapDispatchToProps = dispatch => ({
-    deleteContact : (name) => dispatch(deleteContact(name))
+    deleteContact : (name) => dispatch(deleteContact(name)),
+    editContact: (name, editedcontactDetails) => dispatch(editContact(name, editedcontactDetails))
 })
 
 export default connect(null, mapDispatchToProps)(ContactCard);

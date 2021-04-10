@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, { } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { fetchContacts } from '../../redux/user/user.action'
@@ -16,10 +16,10 @@ const Filter = ({contacts, loadContacts}) =>{
     // const [m, setM] = useState([])
 
 
-    useEffect(() =>{
+    // useEffect(() =>{
     
         
-    },[])
+    // },[])
     return(
         <div>
             <button onClick={()=>loadContacts()}>Refresh Contacts</button>

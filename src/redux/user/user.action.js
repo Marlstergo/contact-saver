@@ -67,12 +67,8 @@ export const deleteContact = (contact) =>({
     type: UserActionTypes.DELETE_CONTACT,
     payload: contact
 })
-// export const signUpWithEmailSuccess = (user) => ({
-//     type: UserActionTypes.SIGN_UP_WITH_EMAIL_START,
-//     payload: user
-// })
-
-// export const signUpWithEmailFailure = (error) => ({
-//     type: UserActionTypes.SIGN_UP_WITH_EMAIL_START,
-//     payload: error
+export const editContact = ( contact, editedcontactDetails ) => ({
+    type: UserActionTypes.EDIT_CONTACT,
+    payload: {contact, editedcontactDetails}
+})
 // })

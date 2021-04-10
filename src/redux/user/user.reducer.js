@@ -1,5 +1,5 @@
 import UserActionTypes from './user.types'
-import { removeContact } from './user.utils'
+import { removeContact, editContact } from './user.utils'
 const INITIAL_STATE = {
     currentUser: null,
     error: null,
@@ -9,10 +9,15 @@ const userReducer = (state = INITIAL_STATE, action) =>{
     switch(action.type){
         case UserActionTypes.SIGN_IN_SUCCESS:
         
-            return {
+            return {        
                 ...state,
                 currentUser: action.payload,
                 error: null
+            }
+        case UserActionTypes.EDIT_CONTACT:
+            return{
+                ...state,
+                contact: editContact(state.contact, action.payload)
             }
         case UserActionTypes.DELETE_CONTACT:
             return{
