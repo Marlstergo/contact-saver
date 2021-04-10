@@ -18,7 +18,7 @@ export const removeContact =  (contacts, contactItem) => {
     return newContactList
 }
 
-export const editContact = async (contacts, details) => {
+export const editContact =  (contacts, details) => {
     const newContactList = contacts.map(
         contact => {
             if (contact.name === details.contact){
@@ -28,7 +28,6 @@ export const editContact = async (contacts, details) => {
                 }
                 contact.number = details.editedcontactDetails.newNumber
             }
-
             return contact
         }
     )
