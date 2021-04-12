@@ -32,14 +32,16 @@ const ContactCard = ({deleteContact, editContact, contacts}) =>{
             <button onClick={() => deleteContact(name)}>delete</button>
             <div >
                 <form key={createdAt} className={`${editing? 'show' : 'hidden'}`}>
-                    <input onChange={handleChange} required type="text" placeholder='edit name..' name="newName" id="new-name"/>
+                    <input key={name} onChange={handleChange} required type="text" placeholder='edit name..' name="newName" id="new-name"/>
                     <br/>
                     
-                    <input onChange={handleChange} required type="number" name="newNumber" placeholder='edit number..' id="new-number"/>
+                    <input key={number} onChange={handleChange} required type="number" name="newNumber" placeholder='edit number..' id="new-number"/>
+                    <br/>
+                    <input key={email} onChange={handleChange} required type="email" name="newEmail" placeholder='edit email..' id="new-email"/>
                     <br/>
                     <button onClick={ (e) =>{ 
                         setEditedDetails({...editedDetails, editing: !editing}) 
-                        editContact(name, {newName, newNumber})
+                        editContact(name, {newName, newNumber, newEmail})
                         e.preventDefault()
                     }}>done</button>
                 </form>

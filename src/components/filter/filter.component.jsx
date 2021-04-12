@@ -28,7 +28,7 @@ const Filter = ({contacts, loadContacts}) =>{
             contacts.map(contactInfo =>{ 
                 console.log(contactInfo)
 
-                return(<ContactCard key={contactInfo.createdAt} contacts={contactInfo} />)
+                return(<ContactCard key={contactInfo.number} contacts={contactInfo} />)
 
             }
         

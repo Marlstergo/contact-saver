@@ -22,11 +22,20 @@ export const editContact =  (contacts, details) => {
     const newContactList = contacts.map(
         contact => {
             if (contact.name === details.contact){
-                contact.name = details.editedcontactDetails.newName
+                if (details.editedcontactDetails.newName !== '' ){    
+                    contact.name = details.editedcontactDetails.newName
+                }else{
+                    return contact
+                }
                 if (details.editedcontactDetails.newNumber === '' ){    
                     return contact
                 }
                 contact.number = details.editedcontactDetails.newNumber
+                if (details.editedcontactDetails.newEmail === '' ){    
+                    return contact
+                }else{
+                    contact.email = details.editedcontactDetails.newEmail
+                }
             }
             return contact
         }
