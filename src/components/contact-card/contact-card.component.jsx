@@ -15,6 +15,7 @@ const ContactCard = ({deleteContact, editContact, contacts}) =>{
         newEmail: '',
         editing: false
     })
+
     
     const handleChange=(e)=>{
         const {value, name}= e.target;
