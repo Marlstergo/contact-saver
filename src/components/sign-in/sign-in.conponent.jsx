@@ -66,7 +66,7 @@ const SignIn = ({emailSignInStart, googleSignInStart, checkUserSession, loadCont
 
 
             </form>
-            <p>i have no account? <a href="./signup"> sign in </a></p>
+            <p>i have no account? <a href="./signup"> sign up </a></p>
         </div>
     )
 }

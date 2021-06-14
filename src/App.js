@@ -47,9 +47,7 @@ function App({currentUser}) {
   
 }
 
-const mapDispatchToProps = dispatch => ({
-  
-})
+
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
