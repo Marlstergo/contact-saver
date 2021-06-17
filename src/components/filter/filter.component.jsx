@@ -1,4 +1,4 @@
-import React, { } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { fetchContacts } from '../../redux/user/user.action'
@@ -13,19 +13,28 @@ import './filter.styles.scss'
 
 const Filter = ({contacts, loadContacts}) =>{
 
-    // const [m, setM] = useState([])
+    const [filter, setFilter] = useState({
+      string: ''
+    })
 
 
     // useEffect(() =>{
-    
+  const handleChange=(e)=>{
+    const {value}= e.target;
+    setFilter({string: value})
+  }
+  const filteredContact = contacts.filter( contact => contact.name.toLowerCase().includes(filter.string.toLowerCase()) || contact.number.includes(filter.string))
+
+  console.log(filter)
         
     // },[])
     return(
         <div>
             <button onClick={()=>loadContacts()}>Refresh Contacts</button>
-            <p>emails: </p>               
+          <p>search contacts by name or number</p>
+          <input type="text" onChange={handleChange} placeholder='Search Contacts...'/>
             {
-            contacts.map(contactInfo =>{ 
+              filteredContact.map(contactInfo =>{
                 console.log(contactInfo)
 
                 return(<ContactCard key={contactInfo.number} contacts={contactInfo} />)
@@ -37,7 +46,6 @@ const Filter = ({contacts, loadContacts}) =>{
 
             
 
-            <input type="text" placeholder='Filter Contacts...'/>
             <div>
             </div>
         </div>

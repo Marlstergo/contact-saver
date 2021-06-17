@@ -33,7 +33,7 @@ const SignIn = ({emailSignInStart, googleSignInStart, checkUserSession, loadCont
         setDetails({...userDetails, [name] : value})
     }
     const handleSubmit= async (e)=>{
-        e.preventDefault(); 
+        e.preventDefault();  
         emailSignInStart(email, password)
     }
     return(

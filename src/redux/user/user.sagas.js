@@ -27,7 +27,7 @@ function* getSnapshotFromUserAuth (user, additionalData){
         console.log(userSnapshot.id)
         console.log('this is inside the function')
         yield put(
-            signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
+            signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
             // yield put(loadContacts())
     } catch (error) {
         put(signInFailure(error))
@@ -86,8 +86,8 @@ export function* checkUserSessions() {
 export function* updateContact({payload: {name, email, number, contactType } }) {
     try{
         const userAuth = yield getCurrentUser()
-        yield addContact(userAuth, name, email, number, contactType)
-        // yield put(loadContacts())
+        yield put(addContact(userAuth, name, email, number, contactType))
+        yield put(loadContacts())
     } catch{
         console.log('error adding contact')
     }
