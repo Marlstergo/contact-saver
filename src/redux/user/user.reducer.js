@@ -3,7 +3,7 @@ import { removeContact, editContact } from './user.utils'
 const INITIAL_STATE = {
     currentUser: null,
     error: null,
-    contact: []
+    contact: [] 
 }
 const userReducer = (state = INITIAL_STATE, action) =>{
     switch(action.type){
